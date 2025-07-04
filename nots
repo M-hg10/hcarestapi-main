@@ -1,0 +1,6 @@
+Test Senaryosu
+POST /auth/login → username ve password gönder → token al
+
+GET /firmalar/liste → Header’a Authorization: Bearer TOKEN ekleyerek istek at
+
+Yetkine göre erişime izin verilir veya reddedilir.
