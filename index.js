@@ -6,6 +6,7 @@ const apiRoutes = require('./routes/ApikullaniciRoutes');
 const firmaRoutes = require('./routes/firmaRoutes');
 const authRoutes = require('./routes/authRoutes');
 const krediRoutes = require('./routes/firmakrediRoutes');
+const uretimRoutes = require("./routes/uretimRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // Route'lar
+app.use("/uretim", uretimRoutes);
 app.use('/kredi', krediRoutes);
 app.use('/firmalar', firmaRoutes);
 app.use('/auth', authRoutes);
@@ -23,7 +25,7 @@ app.get('/', (req, res) => {
   res.send(`
     Ana sayfaya hoş geldin!<br>
     API Dokümantasyonu için:<br>
-    İçindekiler: /firmalar, /auth, /api, /kredi
+    İçindekiler: /firmalar, /auth, /api, /kredi, /uretim
   `);
 });
 
