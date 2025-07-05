@@ -111,3 +111,35 @@ exports.getAllUretim = async (req, res) => {
         res.status(500).json({ error: "Veri alınırken hata oluştu." });
     }
 };
+
+exports.partialUpdateUretim = async (req, res) => {
+    const id = req.params.id;
+    const fields = req.body;
+  
+    // Dinamik SQL parçacığı oluştur
+    const keys = Object.keys(fields);
+    const values = Object.values(fields);
+  
+    if (keys.length === 0) {
+      return res.status(400).json({ error: "Güncellenecek veri yok" });
+    }
+  
+    const setString = keys.map((key, i) => `${key} = $${i + 1}`).join(", ");
+  
+    try {
+      const result = await pool.query(
+        `UPDATE uretimkayit SET ${setString} WHERE id = $${keys.length + 1} RETURNING *`,
+        [...values, id]
+      );
+  
+      if (result.rowCount === 0) {
+        return res.status(404).json({ error: "Kayıt bulunamadı" });
+      }
+  
+      res.json(result.rows[0]);
+    } catch (err) {
+      console.error("partialUpdateUretim error:", err.message);
+      res.status(500).json({ error: "Veri güncellenirken hata oluştu" });
+    }
+  };
+  
