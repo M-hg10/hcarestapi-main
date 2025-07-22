@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const krediRoutes = require('./routes/firmakrediRoutes');
 const uretimRoutes = require("./routes/uretimRoutes");
 const maliislemlerRoutes = require('./routes/maliislemlerRoutes');
+const urunlerRouter = require('./routes/urunler');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -23,6 +24,9 @@ app.use('/firmalar', firmaRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/mali', maliislemlerRoutes);
+
+app.use('/urunler', urunlerRouter);
+
 app.get('/', (req, res) => {
   res.send(`
     Ana sayfaya hoş geldin!<br>
