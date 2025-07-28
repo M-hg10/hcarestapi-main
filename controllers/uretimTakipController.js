@@ -11,18 +11,24 @@ exports.takipleriGetir = async (req, res) => {
   }
 };
 
-// 🔍 GET /uretim-takip/:id
+// 🔍 GET /uretim-takip/:uretimkayit_id
 exports.takipGetir = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const uretimkayit_id = parseInt(req.params.uretimkayit_id);
+
   try {
-    const result = await pool.query('SELECT * FROM uretim_takip WHERE id = $1', [id]);
+    const result = await pool.query(
+      'SELECT * FROM uretim_takip WHERE uretimkayit_id = $1 ORDER BY tarih_saat DESC',
+      [uretimkayit_id]
+    );
+
     if (result.rows.length === 0) {
-      return res.status(404).json({ mesaj: 'Takip kaydı bulunamadı' });
+      return res.status(404).json({ mesaj: 'Takip verisi bulunamadı' });
     }
-    res.json(result.rows[0]);
+
+    res.json(result.rows);
   } catch (err) {
     console.error('Veri alınamadı:', err);
-    res.status(500).json({ mesaj: 'Hata oluştu' });
+    res.status(500).json({ mesaj: 'Sunucu hatası oluştu' });
   }
 };
 
