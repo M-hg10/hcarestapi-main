@@ -14,12 +14,14 @@ exports.takipleriGetir = async (req, res) => {
 // 🔍 GET /uretim-takip/:uretimkayit_id
 exports.takipGetir = async (req, res) => {
   const uretimkayit_id = parseInt(req.params.uretimkayit_id);
+  console.log('Gelen uretimkayit_id:', req.params.uretimkayit_id);
 
   try {
     const result = await pool.query(
       'SELECT * FROM uretim_takip WHERE uretimkayit_id = $1 ORDER BY tarih_saat DESC',
       [uretimkayit_id]
     );
+    console.log('Gelen uretimkayit_id:', req.params.uretimkayit_id);
 
     if (result.rows.length === 0) {
       return res.status(404).json({ mesaj: 'Takip verisi bulunamadı' });

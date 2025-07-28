@@ -3,7 +3,7 @@ const router = express.Router();
 const takipController = require('../controllers/uretimTakipController');
 
 router.get('/', takipController.takipleriGetir);
-router.get('/:id', takipController.takipGetir);
+router.get('/:uretimkayit_id', takipController.takipGetir);
 router.post('/', takipController.takipEkle);
 router.put('/:id', takipController.takipGuncelle);
 router.delete('/:id', takipController.takipSil);
