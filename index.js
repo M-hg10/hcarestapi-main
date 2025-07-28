@@ -9,6 +9,7 @@ const krediRoutes = require('./routes/firmakrediRoutes');
 const uretimRoutes = require("./routes/uretimRoutes");
 const maliislemlerRoutes = require('./routes/maliislemlerRoutes');
 const urunlerRouter = require('./routes/urunler');
+const uretimTakipRoutes = require('./routes/uretimTakipRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -24,6 +25,7 @@ app.use('/firmalar', firmaRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/mali', maliislemlerRoutes);
+app.use('/uretim-takip', uretimTakipRoutes);
 
 app.use('/urunler', urunlerRouter);
 
